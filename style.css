@@ -1,23 +1,38 @@
 body {
     text-align: center;
 }
-.grid {
+
+.container{
+    display: flex;
+    margin-top: 5%;
     margin: auto;
-    margin-top: 10%;
-    width: 200px;
-    height: 400px;
+}
+
+.grid {
+    width: 300px;
+    height: 600px;
     display: flex;
     flex-wrap: wrap;
-    background-color:grey;
+    background-color: black;
+    
 }
 
 .grid div {
-    height: 20px;
-    width: 20px;
-    outline: .1px solid black;
+    height: 30px;
+    width: 30px;
+    outline: 1px solid white;
 }
 
 .tetromino {
     background-color: red;
-    
+}
+
+.minigrid {
+    width: 120px;
+    height: 180px;
+    margin-left: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: yellow;
+
 }
