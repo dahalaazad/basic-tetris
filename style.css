@@ -14,8 +14,10 @@ body {
 .grid div {
     height: 20px;
     width: 20px;
+    outline: .1px solid black;
 }
 
 .tetromino {
-    background-color:red;
+    background-color: red;
+    
 }

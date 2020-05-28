@@ -13,7 +13,7 @@ document.addEventListener ( 'DOMContentLoaded', () => {
     
     const grid = document.querySelector('.grid');
     let squares = Array.from(document.querySelectorAll('.grid div'));
-    const ScoreDisplay = document.querySelectorAll('#score');
+    const scoreDisplay = document.querySelectorAll('#score');
     const StartBtn = document.querySelectorAll('#start-button');
     const width = 10;
     let timerId, nextRandom;
@@ -101,10 +101,24 @@ document.addEventListener ( 'DOMContentLoaded', () => {
         current = theTetrominoes[random][currentRotation];
         currentPosition = 4;
         draw();
+        gameOver();
         }
     }
     
-    
+    function control(e) {
+        if( e.keyCode === 37) { moveLeft(); }
+
+        else if( e.keyCode === 38) { moveUp(); }  //Rotate
+        
+        else if( e.keyCode === 39) { moveRight(); }
+        
+        else if( e.keyCode === 40) { moveDown(); }
+
+    }
+
+    document.addEventListener('keydown', control)
+
+
     function moveDown () {
         removeDraw()
         currentPosition += width;
@@ -115,10 +129,52 @@ document.addEventListener ( 'DOMContentLoaded', () => {
     timerId = setInterval(moveDown, 1000);
 
     function moveLeft () {
-        undraw();
+        removeDraw();
         const isAtLeftEdge = current.some(index => (currentPosition + index) % width === 0);
+
+        if(!isAtLeftEdge)  {currentPosition -= 1}  //move left untill at left edge 
+
+        if (current.some( index => squares[currentPosition + index].classList.contains('taken'))) {  //for shape collision
+            currentPosition += 1 ; 
+        }
+
+        draw();
     }
 
+    function moveRight () {
+        removeDraw();
+        const isAtRightEdge = current.some(index => (currentPosition + index) % width === width - 1);
+
+        if(!isAtRightEdge)  {currentPosition += 1}  //move right untill at right edge 
+
+        if (current.some( index => squares[currentPosition + index].classList.contains('taken'))) {  //for shape collision
+            currentPosition -= 1 ; 
+        }
+
+        draw();
+    }
+
+    function moveUp () {
+        removeDraw();
+        currentRotation ++;
+        if( currentRotation === current.length) { 
+            currentRotation = 0;
+        }
+        current = theTetrominoes[random][currentRotation];
+        draw();
+
+    }    
+
+    //GAME--OVER
+
+    function gameOver () {
+        if (current.some (index => squares[currentPosition + index].classList.contains('taken'))) {
+            scoreDisplay.innerHTML = 'end'
+            clearInterval(timerId)
+        }
+    }
+
+    
 
 
 
