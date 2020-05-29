@@ -4,8 +4,8 @@ body {
 
 .container{
     display: flex;
-    margin-top: 5%;
-    margin: auto;
+    margin-left: 40%;
+    margin-top: 3%;
 }
 
 .grid {
@@ -13,26 +13,26 @@ body {
     height: 600px;
     display: flex;
     flex-wrap: wrap;
-    background-color: black;
+    background-color: rgb(26, 25, 25);
     
 }
 
-.grid div {
+.grid div,.minigrid div {
     height: 30px;
     width: 30px;
     outline: 1px solid white;
 }
 
 .tetromino {
-    background-color: red;
+    background-color: rgb(206, 15, 15);
 }
 
 .minigrid {
-    width: 120px;
-    height: 180px;
+    width: 180px;
+    height: 300px;
     margin-left: 50px;
     display: flex;
     flex-wrap: wrap;
-    background-color: yellow;
+    background-color: skyblue ;
 
 }
