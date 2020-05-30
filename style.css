@@ -28,8 +28,8 @@ body {
 }
 
 .minigrid {
-    width: 180px;
-    height: 300px;
+    width: 120px;
+    height: 450px;
     margin-left: 50px;
     display: flex;
     flex-wrap: wrap;
