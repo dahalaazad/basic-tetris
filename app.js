@@ -21,7 +21,7 @@ document.addEventListener ( 'DOMContentLoaded', () => {
     const grid = document.querySelector('.grid');
     let squares = Array.from(document.querySelectorAll('.grid div'));
     const scoreDisplay = document.querySelector('#score');
-    const StartBtn = document.querySelectorAll('#start-button');
+    const startBtn = document.querySelector('#start-button');
     const width = 10;
     let nextRandom = [];
     //let miniDisplay_Array = [];
@@ -168,13 +168,13 @@ document.addEventListener ( 'DOMContentLoaded', () => {
 
 
     function moveDown () {
+        //if(timerId = null) return
         removeDraw()
         currentPosition += width;
         draw()
         freeze()
     }
 
-    timerId = setInterval(moveDown, 1000);
 
     function moveLeft () {
         removeDraw();
@@ -259,9 +259,22 @@ document.addEventListener ( 'DOMContentLoaded', () => {
         // })
     }
     
-    
+    //PAUSE OR PLAY BUTTON
 
-    timerId = setInterval(moveDown, 500);
+    startBtn.addEventListener('click', () => {
+        if (timerId) {
+            clearInterval(timerId);
+            timerId = null;
+        }
+
+        else {
+            draw();
+            timerId = setInterval(moveDown, 1000);
+            displayShape();
+        }
+    });
+
+    //timerId = setInterval(moveDown, 500);
 
 
     function  addScore () {
@@ -285,10 +298,7 @@ document.addEventListener ( 'DOMContentLoaded', () => {
         }
     }  
     
-    
-    
-    
-      //GAME--OVER
+    //GAME--OVER
 
     function gameOver () {
         if (current.some (index => squares[currentPosition + index].classList.contains('taken'))) {
